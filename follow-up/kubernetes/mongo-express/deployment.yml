@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: follow-up-mongo-express-deployment
+  namespace: follow-up
+  labels:
+    deployment: follow-up-mongo-express
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: mongofollow-up--express
+  template:
+    metadata:
+      labels:
+        pod: follow-up-mongo-express
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: follow-up-mongo-express-container
+        image: mongo-express:latest
+        ports:
+        - containerPort: 8081
+        envFrom:
+        - configMapRef:
+            name: follow-up-configmap
+        - secretRef:
+            name: follow-up-secrets

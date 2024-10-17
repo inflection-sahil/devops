@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: careplan-app-deployment
+  namespace: careplan
+  labels:
+    deployment: careplan-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: careplan-app
+  template:
+    metadata:
+      labels:
+        pod: careplan-app
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: careplan-app-container
+        image: reancare.azurecr.io/careplan:latest
+        # imagePullPolicy: Never
+        ports:
+        - containerPort: 2222
+        envFrom:
+        - configMapRef:
+            name: careplan-configmap
+        - secretRef:
+            name: careplan-secrets

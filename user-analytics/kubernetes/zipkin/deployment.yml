@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-analytics-zipkin-deployment
+  namespace: user-analytics
+  labels:
+    deployment: user-analytics-zipkin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: user-analytics-zipkin
+  template:
+    metadata:
+      labels:
+        pod: user-analytics-zipkin
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: user-analytics-zipkin-container
+        image: openzipkin/zipkin:latest
+        ports:
+        - containerPort: 9411

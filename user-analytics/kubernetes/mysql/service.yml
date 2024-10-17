@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-analytics-mysql-service
+  namespace: user-analytics
+spec:
+  selector:
+    pod: user-analytics-mysql
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
+    

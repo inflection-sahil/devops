@@ -1,0 +1,25 @@
+services:
+  awards-mysql:
+    container_name: awards-mysql-service
+    image: mysql:latest
+    restart: always
+    volumes:
+      - ../db:/var/lib/mysql
+    env_file:
+      - ./.env
+
+  awards-app:
+    container_name: awards-app-service
+    image: reancare.azurecr.io/awards:latest
+    # build:
+    #   context: ../app
+    #   dockerfile: Dockerfile
+    restart: always
+    # volumes:
+    #   - ../app:app
+    ports:
+      - 1111:1111
+    env_file:
+      - ./.env
+    depends_on:
+      - awards-mysql

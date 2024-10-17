@@ -1,0 +1,38 @@
+services:
+  mongo:
+    container_name: follow-up-mongo-service
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ../db:/data/db
+    ports:
+      - 27017:27017
+    env_file:
+      - ./.env
+
+  mongo-express:
+    container_name: follow-up-mongo-express-service
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - 8081:8081
+    env_file:
+      - ./.env
+    depends_on:
+      - mongo
+
+  app:
+    container_name: follow-up-app-service
+    image: reancare.azurecr.io/follow-up:latest
+    # build:
+    #   context: ../app
+    #   dockerfile: Dockerfile
+    restart: always
+    # volumes:
+    #   - ../app:/app
+    ports:
+      - 3333:3333
+    env_file:
+      - ./.env
+    depends_on:
+      - mongo

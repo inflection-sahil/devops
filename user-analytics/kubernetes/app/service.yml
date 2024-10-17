@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-analytics-app-service
+  namespace: user-analytics
+spec:
+  type: LoadBalancer
+  selector:
+    pod: user-analytics-app
+  ports:
+  - protocol: TCP
+    port: 2345
+    targetPort: 2345
+    nodePort: 30006

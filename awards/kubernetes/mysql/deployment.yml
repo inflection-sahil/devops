@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: awards-mysql-deployment
+  namespace: awards
+  labels:
+    deployment: awards-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: awards-mysql
+  template:
+    metadata:
+      labels:
+        pod: awards-mysql
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: awards-mysql-container
+        image: mysql:latest
+        ports:
+        - containerPort: 3306
+        envFrom:
+        - configMapRef:
+            name: awards-configmap
+        - secretRef:
+            name: awards-secrets
+        volumeMounts:
+        - name: mysql-volume
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-volume
+        persistentVolumeClaim:
+          claimName: awards-mysql-pvc

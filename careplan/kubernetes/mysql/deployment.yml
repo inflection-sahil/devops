@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: careplan-mysql-deployment
+  namespace: careplan
+  labels:
+    deployment: careplan-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: careplan-mysql
+  template:
+    metadata:
+      labels:
+        pod: careplan-mysql
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: careplan-mysql-container
+        image: mysql:latest
+        ports:
+        - containerPort: 3306
+        envFrom:
+        - configMapRef:
+            name: careplan-configmap
+        - secretRef:
+            name: careplan-secrets
+        volumeMounts:
+        - name: mysql-volume
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-volume
+        persistentVolumeClaim:
+          claimName: careplan-mysql-pvc

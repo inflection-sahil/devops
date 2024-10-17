@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: follow-up-mongo-express-service
+  namespace: follow-up
+spec:
+  type: LoadBalancer
+  selector:
+    pod: follow-up-mongo-express
+  ports:
+  - protocol: TCP
+    port: 8081
+    targetPort: 8081
+    nodePort: 30004

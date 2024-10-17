@@ -1,0 +1,6 @@
+.env
+accessories
+.terraform*
+terraform.tfstate*
+locals.tf
+values.py

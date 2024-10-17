@@ -1,0 +1,35 @@
+services:
+  mysql:
+    container_name: user-analytics-mysql-service
+    image: mysql:latest
+    restart: always
+    volumes:
+      - ../db:/var/lib/mysql
+    env_file:
+      - ./.env
+
+  zipkin:
+    container_name: user-analytics-zipkin-service
+    image: openzipkin/zipkin:latest
+    restart: always
+    ports:
+      - 9411:9411
+    env_file:
+      - ./.env
+
+  app:
+    container_name: user-analytics-app-service
+    image: reancare.azurecr.io/user-analytics:latest
+    # build:
+    #   context: ../app
+    #   dockerfile: Dockerfile
+    restart: always
+    # volumes:
+    #   - ../app:/app
+    ports:
+      - 5555:5555
+    env_file:
+      - ./.env
+    depends_on:
+      - mysql
+      - zipkin

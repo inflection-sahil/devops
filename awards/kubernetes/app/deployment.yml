@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: awards-app-deployment
+  namespace: awards
+  labels:
+    deployment: awards-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: awards-app
+  template:
+    metadata:
+      labels:
+        pod: awards-app
+    spec:
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: docker-secret
+      containers:
+      - name: awards-app-container
+        image: sahilphule0710/awards:latest
+        # imagePullPolicy: Never
+        ports:
+        - containerPort: 1111
+        envFrom:
+        - configMapRef:
+            name: awards-configmap
+        - secretRef:
+            name: awards-secrets

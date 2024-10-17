@@ -1,0 +1,25 @@
+services:
+  reancare-mysql:
+    container_name: reancare-mysql-service
+    image: mysql:latest
+    restart: always
+    volumes:
+      - ../db:/var/lib/mysql
+    env_file:
+      - ./.env
+
+  reancare-app:
+    container_name: reancare-app-service
+    image: reancare.azurecr.io/reancare:latest
+    # build:
+    #   context: ../app
+    #   dockerfile: Dockerfile
+    restart: always
+    # volumes:
+    #   - ../app:/app
+    ports:
+      - 3000:3000
+    env_file:
+      - ./.env
+    depends_on:
+      - reancare-mysql

@@ -1,0 +1,25 @@
+services:
+  careplan-mysql:
+    container_name: careplan-mysql-service
+    image: mysql:latest
+    restart: always
+    volumes:
+      - ../db:/var/lib/mysql
+    env_file:
+      - ./.env
+
+  careplan-app:
+    container_name: careplan-app-service
+    image: reancare.azurecr.io/careplan:latest
+    # build:
+    #   context: ../app
+    #   dockerfile: Dockerfile
+    # volumes:
+    #   - ../app:/app
+    restart: always
+    ports:
+      - 2222:2222
+    env_file:
+      - ./.env
+    depends_on:
+      - careplan-mysql

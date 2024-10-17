@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reancare-app-deployment
+  # namespace: reancare
+  labels:
+    deployment: reancare-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: reancare-app
+  template:
+    metadata:
+      labels:
+        pod: reancare-app
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: reancare-app-container
+        image: sahilphule0710/reancare:latest
+        # imagePullPolicy: Never
+        ports:
+        - containerPort: 4444
+        envFrom:
+        - configMapRef:
+            name: reancare-configmap
+        - secretRef:
+            name: reancare-secrets

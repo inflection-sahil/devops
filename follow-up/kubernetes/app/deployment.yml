@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: follow-up-app-deployment
+  namespace: follow-up
+  labels:
+    deployment: follow-up-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: follow-up-app
+  template:
+    metadata:
+      labels:
+        pod: follow-up-app
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: follow-up-app-container
+        image: reancare.azurecr.io/follow-up:latest
+        # imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: follow-up-configmap
+        - secretRef:
+            name: follow-up-secrets

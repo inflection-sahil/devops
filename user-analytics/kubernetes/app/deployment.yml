@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-analytics-app-deployment
+  namespace: user-analytics
+  labels:
+    deployment: user-analytics-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: user-analytics-app
+  template:
+    metadata:
+      labels:
+        pod: user-analytics-app
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: user-analytics-app-container
+        image: reancare.azurecr.io/user-analytics:latest
+        # imagePullPolicy: Never
+        ports:
+        - containerPort: 2345
+        envFrom:
+        - configMapRef:
+            name: user-analytics-configmap
+        - secretRef:
+            name: user-analytics-secrets

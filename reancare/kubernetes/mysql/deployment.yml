@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reancare-mysql-deployment
+  # namespace: reancare
+  labels:
+    deployment: reancare-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: reancare-mysql
+  template:
+    metadata:
+      labels:
+        pod: reancare-mysql
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: reancare-mysql-container
+        image: mysql:latest
+        ports:
+        - containerPort: 3306
+        envFrom:
+        - configMapRef:
+            name: reancare-configmap
+        - secretRef:
+            name: reancare-secrets
+        volumeMounts:
+        - name: mysql-volume
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-volume
+        persistentVolumeClaim:
+          claimName: reancare-mysql-pvc

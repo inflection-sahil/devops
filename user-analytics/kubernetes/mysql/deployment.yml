@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-analytics-mysql-deployment
+  namespace: user-analytics
+  labels:
+    deployment: user-analytics-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: user-analytics-mysql
+  template:
+    metadata:
+      labels:
+        pod: user-analytics-mysql
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: user-analytics-mysql-container
+        image: mysql:latest
+        ports:
+        - containerPort: 3306
+        envFrom:
+        - configMapRef:
+            name: user-analytics-configmap
+        - secretRef:
+            name: user-analytics-secrets
+        volumeMounts:
+        - name: mysql-volume
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-volume
+        persistentVolumeClaim:
+          claimName: user-analytics-mysql-pvc

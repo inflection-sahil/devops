@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: reancare-mysql-service
+  # namespace: reancare
+spec:
+  selector:
+    pod: reancare-mysql
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
+    

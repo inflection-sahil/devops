@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-portal-app-deployment
+  # namespace: admin-portal
+  labels:
+    deployment: admin-portal-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: admin-portal-app
+  template:
+    metadata:
+      labels:
+        pod: admin-portal-app
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: admin-portal-app-container
+        image: sahilphule0710/admin-portal:latest
+        # imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: admin-portal-configmap
+        - secretRef:
+            name: admin-portal-secrets

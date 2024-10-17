@@ -1,0 +1,14 @@
+services:
+  admin-portal-app:
+    container_name: admin-portal-app-service
+    image: reancare.azurecr.io/admin-portal:latest
+    # build:
+    #   context: ../app
+    #   dockerfile: Dockerfile
+    restart: always
+    # volumes:
+    #   - ../app:/app
+    ports:
+      - 7272:7272
+    env_file:
+      - ./.env
