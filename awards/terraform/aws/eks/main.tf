@@ -1,11 +1,12 @@
 module "vpc" {
-  source = "../../../../../../../../terraform/modules/aws/vpc"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/vpc"
 
   vpc-properties = local.vpc-properties
 }
 
 module "rds" {
-  source = "../../../../../../../../terraform/modules/aws/rds"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/rds"
+  # source = "github.com/sahilphule/templates/tree/master/terraform/modules/aws/rds"
 
   vpc-id              = local.vpc-id
   vpc-public-subnets  = local.vpc-public-subnets
@@ -19,7 +20,7 @@ module "rds" {
 }
 
 module "eks" {
-  source = "../../../../../../../../terraform/modules/aws/eks"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/eks"
 
   vpc-public-subnets  = local.vpc-public-subnets
   vpc-private-subnets = local.vpc-private-subnets

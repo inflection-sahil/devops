@@ -10,7 +10,7 @@ services:
 
   reancare-app:
     container_name: reancare-app-service
-    image: reancare.azurecr.io/reancare:latest
+    image: sahilphule0710/reancare:latest
     # build:
     #   context: ../app
     #   dockerfile: Dockerfile
@@ -18,7 +18,7 @@ services:
     # volumes:
     #   - ../app:/app
     ports:
-      - 3000:3000
+      - 7272:7272
     env_file:
       - ./.env
     depends_on:

@@ -1,11 +1,11 @@
 module "vpc" {
-  source = "../../../../../../../../terraform/modules/aws/vpc"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/vpc"
 
   vpc-properties = local.vpc-properties
 }
 
 module "s3" {
-  source = "../../../../../../../../terraform/modules/aws/s3"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/s3"
 
   s3-properties = local.s3-properties
 }
@@ -18,7 +18,7 @@ resource "aws_s3_object" "env-file" {
 }
 
 module "rds" {
-  source = "../../../../../../../../terraform/modules/aws/rds"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/rds"
 
   vpc-id              = local.vpc-id
   vpc-public-subnets  = local.vpc-public-subnets
@@ -32,12 +32,12 @@ module "rds" {
 }
 
 // module "ecr-repository" {
-//  source        = "../../../../../../../../terraform/modules/aws/ecr"
+//  source        = "github.com/sahilphule/templates/terraform/modules/aws/ecr"
 //  ecr-repository-name = local.ecr-repository-name
 // }
 
 module "load-balancer" {
-  source = "../../../../../../../../terraform/modules/aws/load-balancer"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/load-balancer"
 
   vpc-id                   = local.vpc-id
   vpc-public-subnets       = local.vpc-public-subnets
@@ -46,7 +46,7 @@ module "load-balancer" {
 }
 
 module "ecs" {
-  source = "../../../../../../../../terraform/modules/aws/ecs"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/ecs"
 
   vpc-id              = local.vpc-id
   vpc-public-subnets  = local.vpc-public-subnets

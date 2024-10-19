@@ -18,7 +18,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: admin-portal-app-container
-        image: sahilphule0710/admin-portal:latest
+        image: priyankainflectionzone/admin-portal:2.0
         # imagePullPolicy: Never
         ports:
         - containerPort: 3000

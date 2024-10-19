@@ -9,6 +9,6 @@ spec:
     pod: reancare-app
   ports:
   - protocol: TCP
-    port: 3000
-    targetPort: 3000
+    port: 7272
+    targetPort: 7272
     nodePort: 30005

@@ -18,10 +18,10 @@ spec:
       restartPolicy: Always
       containers:
       - name: reancare-app-container
-        image: sahilphule0710/reancare:latest
+        image: priyankainflectionzone/reancare:1.0
         # imagePullPolicy: Never
         ports:
-        - containerPort: 4444
+        - containerPort: 7272
         envFrom:
         - configMapRef:
             name: reancare-configmap

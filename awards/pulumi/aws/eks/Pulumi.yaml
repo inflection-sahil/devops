@@ -1,5 +1,5 @@
 name: eks-pulumi
-description: EKS Pulumi Provisioning
+description: EKS Pulumi Deployment
 runtime:
   name: python
   options:

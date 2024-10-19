@@ -1,14 +1,21 @@
 import pulumi
 import pulumi_aws as aws
-import vpc
-import s3 as s3
-import rds
-import load_balancer
-import ecs
+from commons.vpc import vpc
+from commons.s3 import s3
+from commons.rds import rds
+from commons.load_balancer import load_balancer
+from commons.ecs import ecs
+import values
+
+VPC = vpc(values)
+S3 = s3(values)
+RDS = rds(values, VPC)
+Load_balancer = load_balancer(values, VPC)
+ECS = ecs(values, VPC, Load_balancer)
 
 bucket_Object = aws.s3.BucketObject(
     "config.env",
     
-	bucket = s3.s3_bucket.id,
-    source = pulumi.FileAsset("../../../compose/.env")
+	bucket = S3.s3_bucket.id,
+    source = pulumi.FileAsset(values.s3_properties["s3-env-file-path"])
 )
