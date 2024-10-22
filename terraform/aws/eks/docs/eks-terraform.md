@@ -46,13 +46,13 @@ provider "aws" {
 
 ```js
 module "vpc" {
-  source = "./modules/aws/vpc"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/vpc"
 
   vpc-properties = local.vpc-properties
 }
 
 module "rds" {
-  source = "./modules/aws/rds"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/rds"
 
   vpc-id              = local.vpc-id
   vpc-public-subnets  = local.vpc-public-subnets
@@ -66,7 +66,7 @@ module "rds" {
 }
 
 module "eks" {
-  source = "./modules/aws/eks"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/eks"
 
   vpc-public-subnets  = local.vpc-public-subnets
   vpc-private-subnets = local.vpc-private-subnets
@@ -153,10 +153,10 @@ locals {
       "10.0.104.0/24"
     ]
 
-    vpc-tag-value                = ""
-    vpc-public-subnet-tag-value  = ""
-    vpc-private-subnet-tag-value = ""
-    vpc-igw-tag-value            = ""
+    vpc-tag-value                = "eks-vpc"
+    vpc-public-subnet-tag-value  = "eks-public-vpc-subnet"
+    vpc-private-subnet-tag-value = "eks-private-vpc-subnet"
+    vpc-igw-tag-value            = "eks-igw"
   }
 
   vpc-id              = module.vpc.vpc-id
@@ -165,40 +165,37 @@ locals {
 
   // rds variables
   database-properties = {
-    identifier          = ""
-    allocated-storage   = 20
-    engine              = "mysql"
-    engine-version      = "8.0.35"
-    instance-class      = "db.t3.micro"
-    skip-final-snapshot = true
-    publicly-accessible = false
+    db-identifier          = "eks-db"
+    db-allocated-storage   = 20
+    db-engine              = "mysql"
+    db-engine-version      = "8.0.35"
+    db-instance-class      = "db.t3.micro"
+    db-skip-final-snapshot = true
+    db-publicly-accessible = false
 
     db-username = ""
     db-password = ""
 
-    db-sg-tag-value = ""
-    db-tag-value    = ""
+    db-sg-tag-value = "eks-db-sg"
   }
 
   bastion-properties = {
-    count                   = 1
-    instance-type           = "t2.micro"
-    bastion-host-public-key = "~/.ssh/bastion-key.pub"
+    bastion-host-instance-type = "t2.micro"
+    bastion-host-public-key    = ""
 
-    bastion-host-sg-tag-value = ""
-    bastion-host-tag-value    = ""
+    bastion-host-sg-tag-value = "eks-bastion-host"
+    bastion-host-tag-value    = "eks-bastion-host"
   }
 
   // eks variables
   eks-properties = {
-    eks-cluster-role-name = ""
-    eks-cluster-name      = ""
-    eks-node-role-name    = ""
-    eks-node-group-name   = ""
+    eks-cluster-role-name = "eks-cluster-role"
+    eks-cluster-name      = "eks-cluster"
+    eks-node-role-name    = "eks-node-group-role"
+    eks-node-group-name   = "eks-node-group"
     eks-instance-types = [
       "t2.medium"
     ]
-    eks-service-port = 
   }
 }
 ```

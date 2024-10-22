@@ -125,7 +125,7 @@ ecs_properties = {
     "ecs-task-family-name": "ecs-task-family",
     "ecs-container-name": "",
     "ecs-container-image-name": "",
-    "ecs-container-port": ,
+    "ecs-container-port": "",
     "s3-config-bucket": s3_properties["s3-bucket-name"],
     "s3-config-path": "",
 

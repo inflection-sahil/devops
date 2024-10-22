@@ -6,7 +6,6 @@ module "vpc" {
 
 module "rds" {
   source = "github.com/sahilphule/templates/terraform/modules/aws/rds"
-  # source = "github.com/sahilphule/templates/tree/master/terraform/modules/aws/rds"
 
   vpc-id              = local.vpc-id
   vpc-public-subnets  = local.vpc-public-subnets

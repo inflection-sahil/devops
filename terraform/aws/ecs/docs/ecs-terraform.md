@@ -57,26 +57,26 @@ provider "aws" {
 
 ```js
 module "vpc" {
-  source = "./modules/aws/vpc"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/vpc"
 
   vpc-properties = local.vpc-properties
 }
 
 module "s3" {
-  source = "./modules/aws/s3"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/s3"
 
   s3-properties = local.s3-properties
 }
 
 resource "aws_s3_object" "env-file" {
   bucket = local.s3-bucket-id
-  key    = "awards/env.config"
-  source = "../../../compose/.env"
-  etag   = filemd5("../../compose/.env")
+  key    = ""
+  source = ""
+  etag   = filemd5("")
 }
 
 module "rds" {
-  source = "./modules/aws/rds"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/rds"
 
   vpc-id              = local.vpc-id
   vpc-public-subnets  = local.vpc-public-subnets
@@ -89,13 +89,13 @@ module "rds" {
   ]
 }
 
-// module "ecr-repo" {
-//   source        = "./modules/aws/ecr"
-//   ecr-repo-name = local.ecr-repo-name
+// module "ecr-repository" {
+//  source        = "github.com/sahilphule/templates/terraform/modules/aws/ecr"
+//  ecr-repository-name = local.ecr-repository-name
 // }
 
 module "load-balancer" {
-  source = "./modules/aws/load-balancer"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/load-balancer"
 
   vpc-id                   = local.vpc-id
   vpc-public-subnets       = local.vpc-public-subnets
@@ -104,19 +104,15 @@ module "load-balancer" {
 }
 
 module "ecs" {
-  source = "./modules/aws/ecs"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/ecs"
 
   vpc-id              = local.vpc-id
   vpc-public-subnets  = local.vpc-public-subnets
   vpc-private-subnets = local.vpc-private-subnets
-  availability-zones  = local.vpc-properties.availability-zones
-
-  // ecr-repo-url = module.ecr-repo.repository-url
-  repo-url = local.repo-url
 
   ecs-properties           = local.ecs-properties
   ecs-container-definition = local.ecs-container-definition
-  target-group-arn         = local.target-group-arn
+  target-group-arn         = local.load-balancer-tg-arn
   load-balancer-sg-id      = local.load-balancer-sg-id
 
   depends_on = [
@@ -219,10 +215,10 @@ locals {
       "10.0.104.0/24"
     ]
 
-    vpc-tag-value                = ""
-    vpc-public-subnet-tag-value  = ""
-    vpc-private-subnet-tag-value = ""
-    vpc-igw-tag-value            = ""
+    vpc-tag-value                = "ecs-vpc"
+    vpc-public-subnet-tag-value  = "ecs-public-vpc"
+    vpc-private-subnet-tag-value = "ecs-private-vpc"
+    vpc-igw-tag-value            = "ecs-igw"
   }
 
   vpc-id              = module.vpc.vpc-id
@@ -239,65 +235,67 @@ locals {
 
   // rds variables
   database-properties = {
-    identifier          = ""
-    allocated-storage   = 20
-    engine              = "mysql"
-    engine-version      = "8.0.35"
-    instance-class      = "db.t3.micro"
-    skip-final-snapshot = true
-    publicly-accessible = false
+    db-identifier          = "ecs-db"
+    db-allocated-storage   = 20
+    db-engine              = "mysql"
+    db-engine-version      = "8.0.35"
+    db-instance-class      = "db.t3.micro"
+    db-skip-final-snapshot = true
+    db-publicly-accessible = false
 
     db-username = ""
     db-password = ""
 
-    db-sg-tag-value = ""
-    db-tag-value    = ""
+    db-sg-tag-value = "ecs-db-sg"
   }
 
   bastion-properties = {
-    count                   = 1
-    instance-type           = "t2.micro"
-    bastion-host-public-key = "~/.ssh/bastion-key.pub"
+    bastion-host-instance-type = "t2.micro"
+    bastion-host-public-key    = ""
 
-    bastion-host-sg-tag-value = ""
-    bastion-host-tag-value    = ""
+    bastion-host-sg-tag-value = "ecs-bastion-host"
+    bastion-host-tag-value    = "ecs-bastion-host"
   }
-
-  // ecr variables
-  // ecr-repo-name = ""
-  // ecr-repo-url  = module.ecr-repo.repository-url
-  repo-url = ""
 
   // load balancer variables
   load-balancer-properties = {
-    load-balancer-name = ""
-    load-balancer-type = ""
-    target-group-name  = ""
-    port               = "${local.ecs-properties.ecs-container-port}"
+    load-balancer-name    = "ecs-lb"
+    load-balancer-type    = "application"
+    load-balancer-tg-name = "ecs-lb-tg"
+    port                  = "${local.ecs-properties.ecs-container-port}"
 
-    load-balancer-sg-tag-value = ""
+    load-balancer-sg-tag-value = "ecs-load-balancer-sg"
   }
+
+  load-balancer-tg-arn = module.load-balancer.load-balancer-tg-arn
+  load-balancer-sg-id  = module.load-balancer.load-balancer-sg-id
+
+  // ecr variables
+  // ecr-repository-name = "awards"
+  // ecr-repository-url  = module.ecr-repository.repository-url
 
   // ecs variables
   ecs-properties = {
-    ecs-cluster-name             = ""
-    ecs-task-execution-role-name = ""
-    ecs-task-family              = ""
-    ecs-task-name                = ""
+    ecs-cluster-name             = "ecs-cluster"
+    ecs-task-execution-role-name = "ecs-task-execution-role"
+    ecs-task-family              = "ecs-task-family"
+    ecs-task-name                = "ecs-task"
+    // ecs-ecr-repository-url           = "${local.ecr-repository-url}"
+    ecs-dockerhub-repository-url = ""
     ecs-container-name           = ""
-    ecs-container-port           = 
-    s3-config-bucket             = ""
+    ecs-container-port           = ""
+    s3-config-bucket             = "${local.s3-properties.s3-bucket-name}"
     s3-config-path               = ""
-    ecs-service-name             = ""
+    ecs-service-name             = "ecs-service"
 
-    ecs-service-sg-tag-value = ""
+    ecs-service-sg-tag-value = "ecs-service-sg"
   }
 
   ecs-container-definition = <<DEFINITION
     [
       {
         "name": "${local.ecs-properties.ecs-container-name}",
-        "image": "${local.repo-url}",
+        "image": "${local.ecs-properties.ecs-dockerhub-repository-url}",
         "cpu": 512,
         "memory": 1024,
         "essential": true,
@@ -320,9 +318,6 @@ locals {
       }
     ]
     DEFINITION
-
-  target-group-arn    = module.load-balancer.target-group-arn
-  load-balancer-sg-id = module.load-balancer.load-balancer-sg-id
 }
 ```
 14. The definition of *locals.tf* file is complete.
