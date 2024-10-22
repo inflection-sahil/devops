@@ -1,10 +1,6 @@
 import pulumi
 import pulumi_aws as aws
-from commons.vpc import vpc
-from commons.s3 import s3
-from commons.rds import rds
-from commons.load_balancer import load_balancer
-from commons.ecs import ecs
+from commons import vpc, s3, rds, load_balancer, ecs
 import values
 
 VPC = vpc(values)
@@ -13,7 +9,7 @@ RDS = rds(values, VPC)
 Load_balancer = load_balancer(values, VPC)
 ECS = ecs(values, VPC, Load_balancer)
 
-bucket_Object = aws.s3.BucketObject(
+bucket_object = aws.s3.BucketObject(
     "config.env",
     
 	bucket = S3.s3_bucket.id,

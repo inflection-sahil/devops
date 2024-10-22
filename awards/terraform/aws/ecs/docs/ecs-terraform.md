@@ -149,30 +149,29 @@ module "ecs" {
         - s3-bucket-versioning
     - s3-bucket-id
     - database-properties
-        - identifier
-        - allocated-storage
-        - engine
-        - engine-version
-        - instance-class
-        - skip-final-snapshot
-        - publicly-accessible
+        - db-identifier
+        - db-allocated-storage
+        - db-engine
+        - db-engine-version
+        - db-instance-class
+        - db-skip-final-snapshot
+        - db-publicly-accessible
         - db-username
         - db-password
         - db-sg-tag-value
         - db-tag-value
     - bastion-properties
-        - count
-        - instance-type
+        - bastion-host-instance-type
         - bastion-host-public-key
         - bastion-host-sg-tag-value
         - bastion-host-tag-value
-    - ecr-repo-name
-    - ecr-repo-url
-    - repo-url
+    - ecr-repository-name
+    - ecr-repository-url
+    - repository-url
     - load-balancer-properties
         - load-balancer-name
         - load-balancer-type
-        - target-group-name
+        - load-balancer-tg-name
         - port
         - load-balancer-sg-tag-value
     - ecs-properties
@@ -187,10 +186,9 @@ module "ecs" {
         - ecs-service-name
         - ecs-servics-sg-tag-value
     - ecs-container-definition
-    - target-group-arn
+    - tg-arn
     - load-balancer-sg-id
 19. The reference code is attached below.
-
 ```js
 locals {
 

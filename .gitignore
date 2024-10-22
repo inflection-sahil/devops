@@ -4,3 +4,9 @@ accessories
 terraform.tfstate*
 locals.tf
 values.py
+
+venv/
+*__py_cache__*
+.vscode/
+**/__pycache__/
+*.pyc

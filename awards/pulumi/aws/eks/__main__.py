@@ -1,6 +1,4 @@
-from commons.vpc import vpc
-from commons.rds import rds
-from commons.eks import eks
+from commons import vpc, rds, eks
 import values
 
 VPC = vpc(values)

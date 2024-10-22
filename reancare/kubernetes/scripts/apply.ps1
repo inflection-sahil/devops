@@ -6,7 +6,7 @@ kubectl apply -f ../mysql/pvc.yml
 kubectl apply -f ../mysql/deployment.yml
 kubectl apply -f ../mysql/service.yml
 
-Start-Sleep 60
+Start-Sleep 30
 
 kubectl apply -f ../app/deployment.yml
 kubectl apply -f ../app/service.yml
