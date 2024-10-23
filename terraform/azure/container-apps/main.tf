@@ -1,5 +1,4 @@
 module "resource-group" {
-  # source = "github.com/sahilphule/templates/terraform/modules/azure/resource-group"
   source = "../../../../../../templates/terraform/modules/azure/resource-group"
 
   resource-group-properties = local.resource-group-properties
@@ -24,15 +23,10 @@ module "mssql" {
   ]
 }
 
-module "aks" {
-  # source = "github.com/sahilphule/templates/terraform/modules/azure/aks"
-  source = "../../../../../../templates/terraform/modules/azure/aks"
+module "container-app" {
+  source = "../../../../../../templates/terraform/modules/azure/container-apps"
 
-  aks-properties            = local.aks-properties
-  resource-group-properties = local.resource-group-properties
+  container-app-properties  = local.container-app-properties
+  resource-group-properties = local.container-app-properties
   vnet-public-subnet-id     = local.vnet-public-subnet-id
-
-  depends_on = [
-    module.resource-group
-  ]
 }

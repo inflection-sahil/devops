@@ -19,7 +19,8 @@ module "rds" {
 }
 
 module "eks" {
-  source = "github.com/sahilphule/templates/terraform/modules/aws/eks"
+  # source = "github.com/sahilphule/templates/terraform/modules/aws/eks"
+  source = "../../../../../../templates/terraform/modules/aws/eks"
 
   vpc-public-subnets  = local.vpc-public-subnets
   vpc-private-subnets = local.vpc-private-subnets
