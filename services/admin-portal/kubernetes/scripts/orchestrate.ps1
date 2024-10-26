@@ -1,4 +1,3 @@
-Set-Location '~/desktop/inflection-zone/rean-foundation/services/devops/admin-portal/kubernetes/scripts'
 # kubectl create namespace admin-portal
 # kubens admin-portal
 printf '\ndeleting manifest byproducts if present\n\n'

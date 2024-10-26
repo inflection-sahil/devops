@@ -4,13 +4,11 @@ metadata:
   name: reancare-app-service
   # namespace: reancare
 spec:
-  # type: LoadBalancer
-  loadBalancerIP: 172.20.113.115
-  # type: NodePort
+  type: LoadBalancer
   selector:
     pod: reancare-app
   ports:
   - protocol: TCP
     port: 7272
     targetPort: 7272
-    # nodePort: 30005
+    nodePort: 30005

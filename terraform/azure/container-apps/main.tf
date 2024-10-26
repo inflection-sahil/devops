@@ -9,14 +9,19 @@ module "virtual-network" {
 
   virtual-network-properties = local.virtual-network-properties
   resource-group-properties  = local.resource-group-properties
+
+  depends_on = [
+    module.resource-group
+  ]
 }
 
-module "mssql" {
-  source = "../../../../../../templates/terraform/modules/azure/mssql"
+module "mysql-flexible" {
+  source = "../../../../../../templates/terraform/modules/azure/mysql-flexible"
 
-  mssql-properties          = local.mssql-properties
+  mysql-flexible-properties          = local.mysql-flexible-properties
   resource-group-properties = local.resource-group-properties
-  vnet-db-subnet-id         = local.vnet-db-subnet-id
+  vnet-id                   = local.vnet-id
+  vnet-name                 = local.vnet-name
 
   depends_on = [
     module.virtual-network
@@ -27,6 +32,10 @@ module "container-app" {
   source = "../../../../../../templates/terraform/modules/azure/container-apps"
 
   container-app-properties  = local.container-app-properties
-  resource-group-properties = local.container-app-properties
-  vnet-public-subnet-id     = local.vnet-public-subnet-id
+  resource-group-properties = local.resource-group-properties
+  vnet-name                 = local.vnet-name
+
+  depends_on = [
+    module.virtual-network
+  ]
 }

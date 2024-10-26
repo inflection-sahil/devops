@@ -41,7 +41,6 @@ module "load-balancer" {
 
   vpc-id                   = local.vpc-id
   vpc-public-subnets       = local.vpc-public-subnets
-  vpc-private-subnets      = local.vpc-private-subnets
   load-balancer-properties = local.load-balancer-properties
 }
 
@@ -50,7 +49,6 @@ module "ecs" {
 
   vpc-id              = local.vpc-id
   vpc-public-subnets  = local.vpc-public-subnets
-  vpc-private-subnets = local.vpc-private-subnets
 
   ecs-properties           = local.ecs-properties
   ecs-container-definition = local.ecs-container-definition

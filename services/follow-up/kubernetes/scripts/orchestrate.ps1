@@ -1,4 +1,3 @@
-Set-Location '~/desktop/inflection-zone/rean-foundation/services/follow-up/kubernetes/scripts'
 kubectl create namespace follow-up
 kubens follow-up
 printf '\ndeleting manifest byproducts if present\n\n'

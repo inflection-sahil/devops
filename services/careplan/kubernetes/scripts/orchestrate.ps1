@@ -1,4 +1,3 @@
-Set-Location '~/desktop/inflection-zone/rean-foundation/services/careplan/kubernetes/scripts'
 kubectl create namespace careplan
 kubens careplan
 printf '\ndeleting manifest byproducts if present\n\n'

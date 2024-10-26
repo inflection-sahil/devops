@@ -1,4 +1,3 @@
-Set-Location '~/desktop/inflection-zone/rean-foundation/services/user-analytics/kubernetes/scripts'
 kubectl create namespace user-analytics
 kubens user-analytics
 printf '\ndeleting manifest byproducts if present\n\n'

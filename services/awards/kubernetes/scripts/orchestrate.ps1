@@ -1,4 +1,3 @@
-Set-Location '~/desktop/inflection-zone/rean-foundation/services/awards/kubernetes/scripts'
 kubectl create namespace awards
 kubens awards
 printf '\ndeleting manifest byproducts if present\n\n'
