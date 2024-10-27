@@ -1,0 +1,74 @@
+locals {
+
+  aws_region = ""
+
+  // vpc variables
+  vpc-properties = {
+    availability-zones = [
+      "",
+      "",
+      ""
+    ]
+    vpc-cidr-block = ""
+    vpc-subnet-count = {
+      "public"  = 2,
+      "private" = 2
+    }
+    vpc-public-subnet-cidr-blocks = [
+      "",
+      "",
+      "",
+      ""
+    ]
+    vpc-private-subnet-cidr-blocks = [
+      "",
+      "",
+      "",
+      ""
+    ]
+
+    vpc-tag-value                = ""
+    vpc-public-subnet-tag-value  = ""
+    vpc-private-subnet-tag-value = ""
+    vpc-igw-tag-value            = ""
+  }
+
+  vpc-id              = module.vpc.vpc-id
+  vpc-public-subnets  = module.vpc.vpc-public-subnets
+  vpc-private-subnets = module.vpc.vpc-private-subnets
+
+  // rds variables
+  database-properties = {
+    db-identifier          = ""
+    db-allocated-storage   = 20
+    db-engine              = ""
+    db-engine-version      = ""
+    db-instance-class      = ""
+    db-skip-final-snapshot = true
+    db-publicly-accessible = false
+
+    db-username = ""
+    db-password = ""
+
+    db-sg-tag-value = ""
+  }
+
+  bastion-properties = {
+    bastion-host-instance-type = ""
+    bastion-host-public-key    = ""
+
+    bastion-host-sg-tag-value = ""
+    bastion-host-tag-value    = ""
+  }
+
+  // eks variables
+  eks-properties = {
+    eks-cluster-role-name = ""
+    eks-cluster-name      = ""
+    eks-node-role-name    = ""
+    eks-node-group-name   = ""
+    eks-instance-types = [
+      ""
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+locals {
+  # resource group properties
+  resource-group-properties = {
+    rg-location = ""
+    rg-name     = ""
+  }
+
+  # virtual network properties
+  virtual-network-properties = {
+    vnet-name = ""
+    vnet-address-space = [
+      ""
+    ]
+  }
+  vnet-id   = module.virtual-network.vnet-id
+  vnet-name = module.virtual-network.vnet-name
+
+  # mysql flexible properties
+  mysql-flexible-properties = {
+    mysql-vnet-subnet-name = ""
+    mysql-vnet-subnet-address-prefixes = [
+      ""
+    ]
+    mysql-private-dns-zone-name                      = ""
+    mysql-private-dns-zone-virtual-network-link-name = ""
+    mysql-flexible-server-name                       = ""
+    mysql-administrator-login                        = ""
+    mysql-administrator-password                     = ""
+    mysql-sku-name                                   = ""
+    mysql-version                                    = ""
+    mysql-flexible-database-name                     = ""
+    mysql-flexible-server-configuration-name         = ""
+  }
+
+  # aks properties
+  aks-properties = {
+    aks-vnet-subnet-name = ""
+    aks-vnet-subnet-address-prefixes = [
+      ""
+    ]
+    aks-cluster-name                                  = ""
+    aks-kubernetes-version                            = ""
+    aks-dns-prefix                                    = ""
+    aks-node-resource-group-name                      = ""
+    aks-sku-tier                                      = ""
+    aks-default-node-pool-name                        = ""
+    aks-default-node-pool-type                        = ""
+    aks-default-node-pool-vm-size                     = ""
+    aks-default-node-pool-node-count                  = 1
+    aks-default-node-pool-enable-auto-scaling         = false
+    aks-default-node-pool-min-count                   = 1
+    aks-default-node-pool-max-count                   = 1
+    aks-default-node-pool-enable-node-public-ip       = true
+    aks-default-node-pool-temporary-name-for-rotation = ""
+  }
+}

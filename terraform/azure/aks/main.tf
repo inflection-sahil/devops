@@ -18,7 +18,7 @@ module "virtual-network" {
 module "mysql-flexible" {
   source = "../../../../../../templates/terraform/modules/azure/mysql-flexible"
 
-  mysql-properties          = local.mysql-flexible-properties
+  mysql-flexible-properties = local.mysql-flexible-properties
   resource-group-properties = local.resource-group-properties
   vnet-id                   = local.vnet-id
   vnet-name                 = local.vnet-name
