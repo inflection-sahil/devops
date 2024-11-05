@@ -2,7 +2,7 @@ locals {
 
   aws_region = ""
 
-  // vpc variables
+  # vpc variables
   vpc-properties = {
     availability-zones = [
       "",
@@ -37,7 +37,7 @@ locals {
   vpc-private-subnets = module.vpc.vpc-private-subnets
   vpc-public-subnets  = module.vpc.vpc-public-subnets
 
-  // s3 variables
+  # s3 variables
   s3-properties = {
     s3-bucket-name          = ""
     s3-bucket-force-destroy = true
@@ -45,7 +45,7 @@ locals {
   }
   s3-bucket-id = module.s3.s3-bucket-id
 
-  // rds variables
+  # rds variables
   database-properties = {
     db-identifier          = ""
     db-allocated-storage   = 20
@@ -69,7 +69,7 @@ locals {
     bastion-host-tag-value    = ""
   }
 
-  // load balancer variables
+  # load balancer variables
   load-balancer-properties = {
     load-balancer-name    = ""
     load-balancer-type    = ""
@@ -82,12 +82,12 @@ locals {
   load-balancer-tg-arn = module.load-balancer.load-balancer-tg-arn
   load-balancer-sg-id  = module.load-balancer.load-balancer-sg-id
 
-  // ecr variables
-  // ecr-repository-name = ""
-  // ecr-repository-url  = module.ecr-repository.repository-url
+  # ecr variables
+  # ecr-repository-name = ""
+  # ecr-repository-url  = module.ecr-repository.repository-url
   dockerhub-repository-url = ""
 
-  // ecs variables
+  # ecs variables
   ecs-properties = {
     ecs-cluster-name             = ""
     ecs-task-execution-role-name = ""

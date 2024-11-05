@@ -1,0 +1,96 @@
+locals {
+  # resource group properties
+  resource-group-properties = {
+    rg-location = "Central India"
+    rg-name     = "aks-resource-group"
+  }
+
+  # virtual network properties
+  virtual-network-properties = {
+    vnet-name = "aks-vnet"
+    vnet-address-space = [
+      "10.1.0.0/16"
+    ]
+    vnet-public-subnet-name = "aks-vnet-public-subnet"
+    vnet-public-subnet-address-prefixes = [
+      "10.1.1.0/24"
+    ]
+  }
+  vnet-id               = module.virtual-network.vnet-id
+  vnet-name             = module.virtual-network.vnet-name
+  vnet-public-subnet-id = module.virtual-network.vnet-public-subnet-id
+
+  // acr properties
+  acr-properties = {
+    acr-name                          = "aksacr"
+    acr-sku                           = "Basic"
+    acr-public-network-access-enabled = true
+  }
+  acr-id = module.acr.acr-id
+
+  # mysql flexible properties
+  mysql-flexible-properties = {
+    vnet-mysql-flexible-subnet-name = "aks-vnet-mysql-flexible-subnet"
+    vnet-mysql-flexible-subnet-address-prefixes = [
+      "10.1.101.0/24"
+    ]
+    vnet-mysql-flexible-dns-zone-name                      = "aks-vnet-mysql-flexible-dns-zone.mysql.database.azure.com"
+    vnet-mysql-flexible-dns-zone-virtual-network-link-name = "aks-vnet-mysql-flexible-dns-zone-virtual-network-link.com"
+    mysql-flexible-server-name                             = "aks-mysql-flexible-server"
+    mysql-flexible-administrator-login                     = ""
+    mysql-flexible-administrator-password                  = ""
+    mysql-flexible-version                                 = "8.0.21"
+    mysql-flexible-sku-name                                = "B_Standard_B1ms"
+    mysql-flexible-server-read-replica-name                = "aks-mysql-flexible-server-read-replica"
+  }
+
+  # application gateway properties
+  application-gateway-properties = {
+    app-gw-public-ip-name                 = ""
+    app-gw-name                           = ""
+    app-gw-sku-name                       = ""
+    app-gw-sku-tier                       = ""
+    app-gw-sku-capacity                   = ""
+    app-gw-ip-configuration-name          = ""
+    app-gw-frontend-port-name             = ""
+    app-gw-frontend-ip-configuration-name = ""
+    app-gw-backend-address-pool-name      = ""
+    app-gw-backend-http-settings-name     = ""
+    app-gw-http-listener-name             = ""
+    app-gw-request-routing-name           = ""
+  }
+
+  # aks properties
+  aks-properties = {
+    aks-user-assigned-identity-name = "aks-user-assigned-identity"
+
+    aks-cluster-name                     = "aks-cluster"
+    aks-kubernetes-version               = "1.30.1"
+    aks-dns-prefix                       = "aks-cluster"
+    aks-sku-tier                         = "Free"
+    aks-private-cluster-enabled          = false
+    aks-http-application-routing-enabled = true
+
+    aks-default-node-pool-name                        = "defnodepool"
+    aks-default-node-pool-type                        = "VirtualMachineScaleSets"
+    aks-default-node-pool-vm-size                     = "Standard_DS2_v2"
+    aks-default-node-pool-auto-scaling-enabled        = false
+    aks-default-node-pool-min-count                   = null
+    aks-default-node-pool-max-count                   = null
+    aks-default-node-pool-node-count                  = 1
+    aks-default-node-pool-node-public-ip-enabled      = false
+    aks-default-node-pool-temporary-name-for-rotation = "nodepoolrot"
+
+    aks-service-principal-client-id     = ""
+    aks-service-principal-client-secret = ""
+
+    aks-cluster-node-pool-name                   = "nodepool"
+    aks-cluster-node-pool-vm-size                = "Standard_DS2_v2"
+    aks-cluster-node-pool-mode                   = "User"
+    aks-cluster-node-pool-auto-scaling-enabled   = false
+    aks-cluster-node-pool-min-count              = null
+    aks-cluster-node-pool-max-count              = null
+    aks-cluster-node-pool-node-count             = 1
+    aks-cluster-node-pool-node-public-ip-enabled = false
+  }
+}

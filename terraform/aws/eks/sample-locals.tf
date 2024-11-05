@@ -2,7 +2,7 @@ locals {
 
   aws_region = ""
 
-  // vpc variables
+  # vpc variables
   vpc-properties = {
     availability-zones = [
       "",
@@ -37,7 +37,7 @@ locals {
   vpc-public-subnets  = module.vpc.vpc-public-subnets
   vpc-private-subnets = module.vpc.vpc-private-subnets
 
-  // rds variables
+  # rds variables
   database-properties = {
     db-identifier          = ""
     db-allocated-storage   = 20
@@ -61,7 +61,7 @@ locals {
     bastion-host-tag-value    = ""
   }
 
-  // eks variables
+  # eks variables
   eks-properties = {
     eks-cluster-role-name = ""
     eks-cluster-name      = ""

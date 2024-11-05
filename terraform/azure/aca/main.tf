@@ -43,23 +43,15 @@ module "mysql-flexible" {
   ]
 }
 
-# module "application-gateway" {
-#   # source = "github.com/sahilphule/templates/tree/master/terraform/modules/azure/application-gateway"
-#   source = "../../../../../templates/terraform/modules/azure/application-gateway"
+module "aca" {
+  # source = "github.com/sahilphule/templates/tree/master/terraform/modules/azure/aca"
+  source = "../../../../../templates/terraform/modules/azure/aca"
 
-#   application-gateway-properties = local.application-gateway-properties
-#   resource-group-properties      = local.resource-group-properties
-#   vnet-public-subnet-id          = local.vnet-public-subnet-id
-# }
-
-module "aks" {
-  # source = "github.com/sahilphule/templates/tree/master/terraform/modules/azure/aks"
-  source = "../../../../../templates/terraform/modules/azure/aks"
-
-  aks-properties            = local.aks-properties
+  container-app-properties  = local.container-app-properties
   resource-group-properties = local.resource-group-properties
   vnet-public-subnet-id     = local.vnet-public-subnet-id
   acr-id                    = local.acr-id
+  acr-name                  = local.acr-name
 
   depends_on = [
     module.virtual-network

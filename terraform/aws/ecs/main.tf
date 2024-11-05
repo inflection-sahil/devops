@@ -31,10 +31,10 @@ module "rds" {
   ]
 }
 
-// module "ecr-repository" {
-//  source        = "github.com/sahilphule/templates/terraform/modules/aws/ecr"
-//  ecr-repository-name = local.ecr-repository-name
-// }
+# module "ecr-repository" {
+#   source        = "github.com/sahilphule/templates/terraform/modules/aws/ecr"
+#   ecr-repository-name = local.ecr-repository-name
+# }
 
 module "load-balancer" {
   source = "github.com/sahilphule/templates/terraform/modules/aws/load-balancer"
