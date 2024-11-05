@@ -1,6 +1,6 @@
-output "aca-url" {
+output "container-apps-url" {
   description = "container app url"
-  value       = module.aca.aca-url
+  value       = module.container-apps.container-apps-url
 }
 
 output "DB_HOST" {

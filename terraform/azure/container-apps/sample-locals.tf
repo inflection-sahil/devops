@@ -2,16 +2,16 @@ locals {
   # resource group properties
   resource-group-properties = {
     rg-location = "Central India"
-    rg-name     = "aca-resource-group"
+    rg-name     = "container-apps-resource-group"
   }
 
   # virtual network properties
   virtual-network-properties = {
-    vnet-name = "aca-vnet"
+    vnet-name = "container-apps-vnet"
     vnet-address-space = [
       "10.1.0.0/16"
     ]
-    vnet-public-subnet-name = "aca-vnet-public-subnet"
+    vnet-public-subnet-name = "container-apps-vnet-public-subnet"
     vnet-public-subnet-address-prefixes = [
       "10.1.0.0/23"
     ]
@@ -22,7 +22,7 @@ locals {
 
   # acr properties
   acr-properties = {
-    acr-name                          = "acaacr"
+    acr-name                          = "container-appsacr"
     acr-sku                           = "Basic"
     acr-public-network-access-enabled = true
   }
@@ -37,37 +37,37 @@ locals {
 
   # mysql flexible properties
   mysql-flexible-properties = {
-    vnet-mysql-flexible-subnet-name = "aca-vnet-mysql-flexible-subnet"
+    vnet-mysql-flexible-subnet-name = "container-apps-vnet-mysql-flexible-subnet"
     vnet-mysql-flexible-subnet-address-prefixes = [
       "10.1.101.0/24"
     ]
 
-    vnet-mysql-flexible-dns-zone-name                      = "aca-vnet-mysql-flexible-dns-zone.mysql.database.azure.com"
-    vnet-mysql-flexible-dns-zone-virtual-network-link-name = "aca-vnet-mysql-flexible-dns-zone-virtual-network-link.com"
+    vnet-mysql-flexible-dns-zone-name                      = "container-apps-vnet-mysql-flexible-dns-zone.mysql.database.azure.com"
+    vnet-mysql-flexible-dns-zone-virtual-network-link-name = "container-apps-vnet-mysql-flexible-dns-zone-virtual-network-link.com"
 
-    mysql-flexible-server-name            = "aca-mysql-flexible-server"
+    mysql-flexible-server-name            = "container-apps-mysql-flexible-server"
     mysql-flexible-administrator-login    = ""
     mysql-flexible-administrator-password = ""
     mysql-flexible-version                = "8.0.21"
     mysql-flexible-sku-name               = "B_Standard_B1ms"
 
-    mysql-flexible-server-read-replica-name = "aca-mysql-flexible-server-read-replica"
+    mysql-flexible-server-read-replica-name = "container-apps-mysql-flexible-server-read-replica"
   }
 
   # container app properties
   container-app-properties = {
-    aca-acr-scope-map-pull-repo-name = "_repositories_pull"
-    aca-acr-pull-token-name          = "aca-acr-pull-token"
+    container-apps-acr-scope-map-pull-repo-name = "_repositories_pull"
+    container-apps-acr-pull-token-name          = "container-apps-acr-pull-token"
 
-    aca-user-assigned-identity-name = "aca-user-assigned-identity"
+    container-apps-user-assigned-identity-name = "container-apps-user-assigned-identity"
 
-    aca-log-analytics-workspace-name = "aca-log-analytics-workspace"
+    container-apps-log-analytics-workspace-name = "container-apps-log-analytics-workspace"
 
-    aca-environment-name = "aca-environment"
+    container-apps-environment-name = "container-apps-environment"
 
-    aca-name = "aca"
-    # aca-registry-server  = "${local.dockerhub-server}"
-    aca-registry-server = "${local.acr-server}"
+    container-apps-name = "container-apps"
+    # container-apps-registry-server  = "${local.dockerhub-server}"
+    container-apps-registry-server = "${local.acr-server}"
     container-name      = ""
     # container-image-name = "${local.dockerhub-repository-url}"
     container-image-name = "${local.acr-server}${acr-repository-url}"

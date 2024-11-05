@@ -43,9 +43,9 @@ module "mysql-flexible" {
   ]
 }
 
-module "aca" {
-  # source = "github.com/sahilphule/templates/tree/master/terraform/modules/azure/aca"
-  source = "../../../../../templates/terraform/modules/azure/aca"
+module "container-apps" {
+  # source = "github.com/sahilphule/templates/tree/master/terraform/modules/azure/container-apps"
+  source = "../../../../../templates/terraform/modules/azure/container-apps"
 
   container-app-properties  = local.container-app-properties
   resource-group-properties = local.resource-group-properties
