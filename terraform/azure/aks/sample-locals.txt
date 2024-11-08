@@ -1,4 +1,7 @@
 locals {
+  # subscription id
+  subscription-id = ""
+
   # resource group properties
   resource-group-properties = {
     rg-location = "Central India"
@@ -20,10 +23,11 @@ locals {
   vnet-name             = module.virtual-network.vnet-name
   vnet-public-subnet-id = module.virtual-network.vnet-public-subnet-id
 
-  // acr properties
+  # acr properties
   acr-properties = {
     acr-name                          = "aksacr"
     acr-sku                           = "Basic"
+    acr-admin-enabled                 = true
     acr-public-network-access-enabled = true
   }
   acr-id = module.acr.acr-id

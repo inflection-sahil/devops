@@ -1,4 +1,7 @@
 locals {
+  # subscription id
+  subscription-id = ""
+
   # resource group properties
   resource-group-properties = {
     rg-location = "Central India"
@@ -24,6 +27,7 @@ locals {
   acr-properties = {
     acr-name                          = "container-appsacr"
     acr-sku                           = "Basic"
+    acr-admin-enabled                 = true
     acr-public-network-access-enabled = true
   }
   acr-id   = module.acr.acr-id
@@ -68,7 +72,7 @@ locals {
     container-apps-name = "container-apps"
     # container-apps-registry-server  = "${local.dockerhub-server}"
     container-apps-registry-server = "${local.acr-server}"
-    container-name      = ""
+    container-name                 = ""
     # container-image-name = "${local.dockerhub-repository-url}"
     container-image-name = "${local.acr-server}${acr-repository-url}"
   }

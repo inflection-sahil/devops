@@ -4,7 +4,6 @@ accessories
 terraform.tfstate*
 locals.tf
 values.py
-terraform/azure/*/providers.tf
 
 venv/
 *__py_cache__*
