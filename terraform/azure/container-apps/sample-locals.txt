@@ -25,13 +25,15 @@ locals {
 
   # acr properties
   acr-properties = {
-    acr-name                          = "container-appsacr"
+    acr-name                          = "containerappsacr"
     acr-sku                           = "Basic"
     acr-admin-enabled                 = true
     acr-public-network-access-enabled = true
   }
   acr-id   = module.acr.acr-id
   acr-name = module.acr.acr-name
+  acr-admin-username = module.acr.acr-admin-username
+  acr-admin-password = module.acr.acr-admin-password
 
   acr-server         = module.acr.acr-login-server
   acr-repository-url = ""
@@ -60,20 +62,19 @@ locals {
 
   # container app properties
   container-app-properties = {
-    container-apps-acr-scope-map-pull-repo-name = "_repositories_pull"
-    container-apps-acr-pull-token-name          = "container-apps-acr-pull-token"
+    ca-acr-scope-map-pull-repo-name = "_repositories_pull"
+    ca-acr-pull-token-name          = "container-apps-acr-pull-token"
 
-    container-apps-user-assigned-identity-name = "container-apps-user-assigned-identity"
+    ca-user-assigned-identity-name = "container-apps-user-assigned-identity"
 
-    container-apps-log-analytics-workspace-name = "container-apps-log-analytics-workspace"
+    ca-log-analytics-workspace-name = "container-apps-log-analytics-workspace"
+    ca-environment-name = "container-apps-environment"
 
-    container-apps-environment-name = "container-apps-environment"
-
-    container-apps-name = "container-apps"
-    # container-apps-registry-server  = "${local.dockerhub-server}"
-    container-apps-registry-server = "${local.acr-server}"
-    container-name                 = ""
+    ca-name = "container-apps"
+    # ca-registry-server  = "${local.dockerhub-server}"
+    ca-registry-server = "${local.acr-server}"
+    container-name     = "app-service"
     # container-image-name = "${local.dockerhub-repository-url}"
-    container-image-name = "${local.acr-server}${acr-repository-url}"
+    container-image-name = "${local.acr-server}/${local.acr-repository-url}"
   }
 }

@@ -43,15 +43,6 @@ module "mysql-flexible" {
   ]
 }
 
-# module "application-gateway" {
-#   # source = "github.com/sahilphule/templates/tree/master/terraform/modules/azure/application-gateway"
-#   source = "../../../../../templates/terraform/modules/azure/application-gateway"
-
-#   application-gateway-properties = local.application-gateway-properties
-#   resource-group-properties      = local.resource-group-properties
-#   vnet-public-subnet-id          = local.vnet-public-subnet-id
-# }
-
 module "aks" {
   # source = "github.com/sahilphule/templates/tree/master/terraform/modules/azure/aks"
   source = "../../../../../templates/terraform/modules/azure/aks"

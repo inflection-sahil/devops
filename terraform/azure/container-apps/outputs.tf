@@ -1,6 +1,6 @@
 output "acr-login-server" {
   description = "acr login server"
-  value       = module.acr.acr-login_server
+  value       = module.acr.acr-login-server
 }
 
 output "acr-admin-username" {
@@ -11,6 +11,7 @@ output "acr-admin-username" {
 output "acr-admin-password" {
   description = "acr admin password"
   value       = module.acr.acr-admin-password
+  sensitive = true
 }
 
 output "DB_HOST" {
@@ -18,7 +19,7 @@ output "DB_HOST" {
   value       = module.mysql-flexible.DB_HOST
 }
 
-output "container-apps-url" {
+output "container-app-url" {
   description = "container app url"
-  value       = module.container-apps.container-apps-url
+  value       = module.container-apps.container-app-url
 }

@@ -50,8 +50,10 @@ module "container-apps" {
   container-app-properties  = local.container-app-properties
   resource-group-properties = local.resource-group-properties
   vnet-public-subnet-id     = local.vnet-public-subnet-id
-  acr-id                    = local.acr-id
-  acr-name                  = local.acr-name
+  # acr-id                    = local.acr-id
+  # acr-name                  = local.acr-name
+  acr-admin-username = local.acr-admin-username
+  acr-admin-password = local.acr-admin-password
 
   depends_on = [
     module.virtual-network
