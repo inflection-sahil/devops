@@ -1,11 +1,11 @@
-kubectl delete -f ../app/deployment.yml
 kubectl delete -f ../app/service.yml
+kubectl delete -f ../app/deployment.yml
 
-kubectl delete -f ../mongo-express/deployment.yml
 kubectl delete -f ../mongo-express/service.yml
+kubectl delete -f ../mongo-express/deployment.yml
 
-kubectl delete -f ../mongo/deployment.yml
 kubectl delete -f ../mongo/service.yml
+kubectl delete -f ../mongo/deployment.yml
 kubectl delete -f ../mongo/pvc.yml
 kubectl delete -f ../mongo/pv.yml
 

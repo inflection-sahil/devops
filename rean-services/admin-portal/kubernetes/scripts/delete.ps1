@@ -1,5 +1,5 @@
-kubectl delete -f ../app/deployment.yml
 kubectl delete -f ../app/service.yml
+kubectl delete -f ../app/deployment.yml
 
 kubectl delete -f ../accessories/configmap.yml
 kubectl delete -f ../accessories/secrets.yml

@@ -1,3 +1,8 @@
+output "ecr-repository-url" {
+  description = "ecr repository url"
+  value       = module.ecr.ecr-repository-url
+}
+
 output "DB_HOST" {
   description = "db host address"
   value       = module.rds.DB_HOST

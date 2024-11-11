@@ -1,11 +1,11 @@
-kubectl delete -f ../app/deployment.yml
 kubectl delete -f ../app/service.yml
+kubectl delete -f ../app/deployment.yml
 
-kubectl delete -f ../zipkin/deployment.yml
 kubectl delete -f ../zipkin/service.yml
+kubectl delete -f ../zipkin/deployment.yml
 
-kubectl delete -f ../mysql/deployment.yml
 kubectl delete -f ../mysql/service.yml
+kubectl delete -f ../mysql/deployment.yml
 kubectl delete -f ../mysql/pvc.yml
 kubectl delete -f ../mysql/pv.yml
 
