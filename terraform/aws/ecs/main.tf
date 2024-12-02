@@ -42,8 +42,8 @@ module "ecr-repository" {
 }
 
 module "load-balancer" {
-  # source = "github.com/sahilphule/templates/terraform/modules/aws/load-balancer"
-  source = "../../../../../templates/terraform/modules/aws/load-balancer"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/load-balancer"
+  # source = "../../../../../templates/terraform/modules/aws/load-balancer"
 
   load-balancer-properties = local.load-balancer-properties
   vpc-id                   = local.vpc-id
@@ -51,8 +51,8 @@ module "load-balancer" {
 }
 
 module "ecs" {
-  # source = "github.com/sahilphule/templates/terraform/modules/aws/ecs"
-  source = "../../../../../templates/terraform/modules/aws/ecs"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/ecs"
+  # source = "../../../../../templates/terraform/modules/aws/ecs"
 
   ecs-properties           = local.ecs-properties
   ecs-container-definition = local.ecs-container-definition

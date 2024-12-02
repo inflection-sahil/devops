@@ -1,0 +1,27 @@
+services:
+  mysql:
+    container_name: mysql-service
+    image: mysql:latest
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+    env_file:
+      - ./.env
+
+  app:
+    container_name: forms-service
+    image: 443751504066.dkr.ecr.ap-south-1.amazonaws.com/forms-service:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    restart: always
+    ports:
+    - 3000:3000
+    env_file:
+    - ./.env
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
+    driver: local

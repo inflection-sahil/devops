@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: form-builder-deployment
+  namespace: forms
+  labels:
+    deployment: form-builder
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: form-builder
+  template:
+    metadata:
+      labels:
+        pod: form-builder
+    spec:
+      restartPolicy: Always
+      # imagePullSecrets:
+      # - name: regcred
+      containers:
+      - name: form-builder-container
+        image: 443751504066.dkr.ecr.ap-south-1.amazonaws.com/form-builder:2.0
+        # imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: form-builder-configmap
+        

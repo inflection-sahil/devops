@@ -1,0 +1,12 @@
+services:
+  app:
+    container_name: forms-builder-service
+    image: 443751504066.dkr.ecr.ap-south-1.amazonaws.com/form-builder:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    restart: always
+    ports:
+    - 3000:3000
+    env_file:
+    - ./.env

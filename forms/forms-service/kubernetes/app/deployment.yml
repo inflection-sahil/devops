@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forms-service-deployment
+  namespace: forms
+  labels:
+    deployment: forms-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: forms-service
+  template:
+    metadata:
+      labels:
+        pod: forms-service
+    spec:
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: forms-service-container
+        image: 443751504066.dkr.ecr.ap-south-1.amazonaws.com/forms-service:latest
+        # imagePullPolicy: Never
+        ports:
+        - containerPort: 5555
+        envFrom:
+        - configMapRef:
+            name: forms-service-configmap
+        - secretRef:
+            name: forms-service-secrets
