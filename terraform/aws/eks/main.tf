@@ -5,7 +5,7 @@ module "vpc" {
   vpc-properties = local.vpc-properties
 }
 
-module "ecr" {
+module "ecr-repository" {
   source = "github.com/sahilphule/templates/terraform/modules/aws/ecr"
   # source = "../../../../../templates/terraform/modules/aws/ecr"
 
@@ -16,8 +16,9 @@ module "rds" {
   source = "github.com/sahilphule/templates/terraform/modules/aws/rds"
   # source = "../../../../../templates/terraform/modules/aws/rds"
 
-  database-properties = local.database-properties
-  bastion-properties  = local.bastion-properties
+  rds-properties = local.rds-properties
+  bastion-host-properties  = local.bastion-host-properties
+  
   vpc-id              = local.vpc-id
   vpc-public-subnets  = local.vpc-public-subnets
   vpc-private-subnets = local.vpc-private-subnets
@@ -31,11 +32,11 @@ module "eks" {
   source = "github.com/sahilphule/templates/terraform/modules/aws/eks"
   # source = "../../../../../templates/terraform/modules/aws/eks"
 
-  eks-properties = local.eks-properties
-  vpc-public-subnets  = local.vpc-public-subnets
+  eks-properties     = local.eks-properties
+  vpc-public-subnets = local.vpc-public-subnets
 
   depends_on = [
-    module.ecr,
+    module.ecr-repository,
     module.rds
   ]
 }

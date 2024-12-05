@@ -23,19 +23,20 @@ module "rds" {
   source = "github.com/sahilphule/templates/terraform/modules/aws/rds"
   # source = "../../../../../templates/terraform/modules/aws/rds"
 
+  rds-properties = local.rds-properties
+  bastion-host-properties  = local.bastion-host-properties
+
   vpc-id              = local.vpc-id
   vpc-public-subnets  = local.vpc-public-subnets
   vpc-private-subnets = local.vpc-private-subnets
-  database-properties = local.database-properties
-  bastion-properties  = local.bastion-properties
-
+  
   depends_on = [
     module.vpc
   ]
 }
 
 module "ecr-repository" {
-  source        = "github.com/sahilphule/templates/terraform/modules/aws/ecr"
+  source = "github.com/sahilphule/templates/terraform/modules/aws/ecr"
   # source = "../../../../../templates/terraform/modules/aws/ecr"
 
   ecr-properties = local.ecr-properties

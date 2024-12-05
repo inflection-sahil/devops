@@ -1,74 +1,84 @@
 locals {
 
-  aws_region = ""
+  aws_region = "ap-south-1"
 
-  # vpc variables
+  # vpc properties
   vpc-properties = {
     availability-zones = [
-      "",
-      "",
-      ""
+      "ap-south-1a",
+      "ap-south-1b",
+      "ap-south-1c"
     ]
-    vpc-cidr-block = ""
+    vpc-cidr-block = "10.0.0.0/16"
     vpc-subnet-count = {
       "public"  = 2,
       "private" = 2
     }
     vpc-public-subnet-cidr-blocks = [
-      "",
-      "",
-      "",
-      ""
+      "10.0.1.0/24",
+      "10.0.2.0/24",
+      "10.0.3.0/24",
+      "10.0.4.0/24"
     ]
     vpc-private-subnet-cidr-blocks = [
-      "",
-      "",
-      "",
-      ""
+      "10.0.101.0/24",
+      "10.0.102.0/24",
+      "10.0.103.0/24",
+      "10.0.104.0/24"
     ]
 
-    vpc-tag-value                = ""
-    vpc-public-subnet-tag-value  = ""
-    vpc-private-subnet-tag-value = ""
-    vpc-igw-tag-value            = ""
+    vpc-tag-value                = "eks-vpc"
+    vpc-public-subnet-tag-value  = "eks-public-vpc-subnet"
+    vpc-private-subnet-tag-value = "eks-private-vpc-subnet"
+    vpc-igw-tag-value            = "eks-igw"
   }
 
   vpc-id              = module.vpc.vpc-id
   vpc-public-subnets  = module.vpc.vpc-public-subnets
   vpc-private-subnets = module.vpc.vpc-private-subnets
 
-  # rds variables
-  database-properties = {
-    db-identifier          = ""
+  # ecr properties
+  ecr-properties = {
+    ecr-repository-name         = "eksecr"
+    ecr-repository-force-delete = true
+
+    ecr-public-repository-name          = "eksecr"
+    ecr-public-repository-force-destroy = true
+  }
+
+  # rds properties
+  rds-properties = {
+    db-identifier          = "eks-db"
     db-allocated-storage   = 20
-    db-engine              = ""
-    db-engine-version      = ""
-    db-instance-class      = ""
+    db-engine              = "mysql"
+    db-engine-version      = "8.0.35"
+    db-instance-class      = "db.t3.micro"
     db-skip-final-snapshot = true
     db-publicly-accessible = false
 
     db-username = ""
     db-password = ""
 
-    db-sg-tag-value = ""
+    db-sg-tag-value = "eks-db-sg"
   }
 
-  bastion-properties = {
-    bastion-host-instance-type = ""
-    bastion-host-public-key    = ""
+  # bastion host properties
+  bastion-host-properties = {
+    bastion-host-instance-type = "t2.micro"
+    bastion-host-public-key    = "~/.ssh/bastion-key.pub"
 
-    bastion-host-sg-tag-value = ""
-    bastion-host-tag-value    = ""
+    bastion-host-sg-tag-value = "eks-bastion-host-sg"
+    bastion-host-tag-value    = "eks-bastion-host"
   }
 
-  # eks variables
+  # eks properties
   eks-properties = {
-    eks-cluster-role-name = ""
-    eks-cluster-name      = ""
-    eks-node-role-name    = ""
-    eks-node-group-name   = ""
+    eks-cluster-role-name = "eks-cluster-role"
+    eks-cluster-name      = "eks-cluster"
+    eks-node-role-name    = "eks-node-group-role"
+    eks-node-group-name   = "eks-node-group"
     eks-instance-types = [
-      ""
+      "t2.medium"
     ]
   }
 }

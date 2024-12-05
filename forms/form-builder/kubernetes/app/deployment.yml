@@ -20,7 +20,7 @@ spec:
       # - name: regcred
       containers:
       - name: form-builder-container
-        image: 443751504066.dkr.ecr.ap-south-1.amazonaws.com/form-builder:2.0
+        image: 443751504066.dkr.ecr.ap-south-1.amazonaws.com/form-builder:3.0
         # imagePullPolicy: Never
         ports:
         - containerPort: 3000

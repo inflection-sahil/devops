@@ -11,7 +11,7 @@ output "acr-admin-username" {
 output "acr-admin-password" {
   description = "acr admin password"
   value       = module.acr.acr-admin-password
-  sensitive = true
+  sensitive   = true
 }
 
 output "DB_HOST" {

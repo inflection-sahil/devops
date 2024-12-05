@@ -1,6 +1,6 @@
 output "ecr-repository-url" {
   description = "ecr repository url"
-  value       = module.ecr.ecr-repository-url
+  value       = module.ecr-repository.ecr-repository-url
 }
 
 output "DB_HOST" {
@@ -15,5 +15,5 @@ output "bastion-host-ip" {
 
 output "load-balancer-dns" {
   description = "load balancer dns"
-  value = module.load-balancer.load-balancer-dns-name
+  value       = module.load-balancer.load-balancer-dns-name
 }

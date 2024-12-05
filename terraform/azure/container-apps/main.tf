@@ -1,12 +1,12 @@
 module "resource-group" {
-  source = "github.com/sahilphule/templates/tree/master/terraform/modules/azure/resource-group"
+  source = "github.com/sahilphule/templates/terraform/modules/azure/resource-group"
   # source = "../../../../../templates/terraform/modules/azure/resource-group"
 
   resource-group-properties = local.resource-group-properties
 }
 
 module "virtual-network" {
-  source = "github.com/sahilphule/templates/tree/master/terraform/modules/azure/virtual-network"
+  source = "github.com/sahilphule/templates/terraform/modules/azure/virtual-network"
   # source = "../../../../../templates/terraform/modules/azure/virtual-network"
 
   virtual-network-properties = local.virtual-network-properties
@@ -18,7 +18,7 @@ module "virtual-network" {
 }
 
 module "acr" {
-  source = "github.com/sahilphule/templates/tree/master/terraform/modules/azure/acr"
+  source = "github.com/sahilphule/templates/terraform/modules/azure/acr"
   # source = "../../../../../templates/terraform/modules/azure/acr"
 
   acr-properties            = local.acr-properties
@@ -30,7 +30,7 @@ module "acr" {
 }
 
 module "mysql-flexible" {
-  source = "github.com/sahilphule/templates/tree/master/terraform/modules/azure/mysql-flexible"
+  source = "github.com/sahilphule/templates/terraform/modules/azure/mysql-flexible"
   # source = "../../../../../templates/terraform/modules/azure/mysql-flexible"
 
   mysql-flexible-properties = local.mysql-flexible-properties
@@ -44,7 +44,7 @@ module "mysql-flexible" {
 }
 
 module "container-apps" {
-  source = "github.com/sahilphule/templates/tree/master/terraform/modules/azure/container-apps"
+  source = "github.com/sahilphule/templates/terraform/modules/azure/container-apps"
   # source = "../../../../../templates/terraform/modules/azure/container-apps"
 
   container-app-properties  = local.container-app-properties

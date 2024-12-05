@@ -30,8 +30,8 @@ locals {
     acr-admin-enabled                 = true
     acr-public-network-access-enabled = true
   }
-  acr-id   = module.acr.acr-id
-  acr-name = module.acr.acr-name
+  acr-id             = module.acr.acr-id
+  acr-name           = module.acr.acr-name
   acr-admin-username = module.acr.acr-admin-username
   acr-admin-password = module.acr.acr-admin-password
 
@@ -68,7 +68,7 @@ locals {
     ca-user-assigned-identity-name = "container-apps-user-assigned-identity"
 
     ca-log-analytics-workspace-name = "container-apps-log-analytics-workspace"
-    ca-environment-name = "container-apps-environment"
+    ca-environment-name             = "container-apps-environment"
 
     ca-name = "container-apps"
     # ca-registry-server  = "${local.dockerhub-server}"
