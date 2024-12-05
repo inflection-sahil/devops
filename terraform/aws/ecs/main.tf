@@ -23,13 +23,13 @@ module "rds" {
   source = "github.com/sahilphule/templates/terraform/modules/aws/rds"
   # source = "../../../../../templates/terraform/modules/aws/rds"
 
-  rds-properties = local.rds-properties
-  bastion-host-properties  = local.bastion-host-properties
+  rds-properties          = local.rds-properties
+  bastion-host-properties = local.bastion-host-properties
 
   vpc-id              = local.vpc-id
   vpc-public-subnets  = local.vpc-public-subnets
   vpc-private-subnets = local.vpc-private-subnets
-  
+
   depends_on = [
     module.vpc
   ]

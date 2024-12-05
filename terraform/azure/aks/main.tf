@@ -9,8 +9,8 @@ module "virtual-network" {
   source = "github.com/sahilphule/templates/terraform/modules/azure/virtual-network"
   # source = "../../../../../templates/terraform/modules/azure/virtual-network"
 
-  virtual-network-properties = local.virtual-network-properties
   resource-group-properties  = local.resource-group-properties
+  virtual-network-properties = local.virtual-network-properties
 
   depends_on = [
     module.resource-group
@@ -21,8 +21,8 @@ module "acr" {
   source = "github.com/sahilphule/templates/terraform/modules/azure/acr"
   # source = "../../../../../templates/terraform/modules/azure/acr"
 
-  acr-properties            = local.acr-properties
   resource-group-properties = local.resource-group-properties
+  acr-properties            = local.acr-properties
 
   depends_on = [
     module.resource-group
@@ -33,8 +33,8 @@ module "mysql-flexible" {
   source = "github.com/sahilphule/templates/terraform/modules/azure/mysql-flexible"
   # source = "../../../../../templates/terraform/modules/azure/mysql-flexible"
 
-  mysql-flexible-properties = local.mysql-flexible-properties
   resource-group-properties = local.resource-group-properties
+  mysql-flexible-properties = local.mysql-flexible-properties
   vnet-id                   = local.vnet-id
   vnet-name                 = local.vnet-name
 
@@ -47,8 +47,8 @@ module "aks" {
   source = "github.com/sahilphule/templates/terraform/modules/azure/aks"
   # source = "../../../../../templates/terraform/modules/azure/aks"
 
-  aks-properties            = local.aks-properties
   resource-group-properties = local.resource-group-properties
+  aks-properties            = local.aks-properties
   vnet-public-subnet-id     = local.vnet-public-subnet-id
   # acr-id                    = local.acr-id
 

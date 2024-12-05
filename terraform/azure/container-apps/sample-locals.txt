@@ -60,6 +60,24 @@ locals {
     mysql-flexible-server-read-replica-name = "container-apps-mysql-flexible-server-read-replica"
   }
 
+  # storage account properties
+  storage-properties = {
+    sa-name                          = "storageaccount"
+    sa-tier                          = "Standard"
+    sa-kind                          = "StorageV2"
+    sa-replication-type              = "LRS"
+    sa-access-tier                   = "Hot"
+    sa-https-traffic-only-enabled    = true
+    sa-public-network-access-enabled = true
+    sa-network-rules-default-action  = "Allow"
+
+    sc-name = "container-apps-storage-container"
+
+    sb-object-name        = "env-file"
+    sb-object-type        = "Block"
+    sb-object-source-path = "../../../compose/.env"
+  }
+
   # container app properties
   container-app-properties = {
     ca-acr-scope-map-pull-repo-name = "_repositories_pull"
