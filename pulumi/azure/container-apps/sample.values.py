@@ -29,8 +29,13 @@ container_app_properties = {
     "container-app-log-analytics-workspace-name": "container-app-log-analytics-workspace",
     "container-app-environment-name": "container-app-environment",
     "container-app-name": "container-app",
+    
     "container-app-ingress-external-enabled": True,
     "container-app-ingress-port": 80,
-    "container-name": "nginx-service",
-    "container-image": "nginx"
+    
+    "container-app-container-name": "nginx-service",
+    "container-app-container-image": "nginx",
+
+    "container-app-min-replicas": 1,
+    "container-app-max-replicas": 5
 }
